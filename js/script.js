@@ -36,7 +36,8 @@ document.getElementById("langTextArea").addEventListener('keypress', (e) => {
     }
 })
 
-document.getElementById("langTextArea").addEventListener('dblclick', (e) => {
+document.getElementById("langTextArea").addEventListener('click', (e) => {
+    e.preventDefault();
     document.getElementById("dropdown").style.top = e.clientY + 'px';
     document.getElementById("dropdown").style.left = e.clientX + 'px';
     if (document.getElementById("dropdown").style.display === 'none') {
@@ -44,7 +45,7 @@ document.getElementById("langTextArea").addEventListener('dblclick', (e) => {
         document.getElementById("dropdown").style.display = 'block';
     }
     else {
-        document.getElcementById("dropdown").style.display = 'none';
+        document.getElementById("dropdown").style.display = 'none';
     }
 });
 
@@ -54,7 +55,7 @@ document.getElementById("langTextArea").addEventListener('click', (e) => {
 
 document.getElementById("dropdown").addEventListener("click", function() {
     let translatedText = document.getElementById('langTextArea').value;
-    translatedText = translatedText.substring(0, translatedText.indexOf(response));
+    translatedText = translatedText.substring(0, translatedText.lastIndexOf(response));
     response = document.getElementById("dropdown").value;
     translatedText = translatedText + document.getElementById("dropdown").value;
     document.getElementById('langTextArea').value = translatedText;
