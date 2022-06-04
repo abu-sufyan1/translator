@@ -1,4 +1,5 @@
 var dropdownValues = [];
+var response = '';
 document.getElementById("langTextArea").addEventListener('keypress', (e) => {
     if (e.key === " " ||
         e.code === "Space" ||
@@ -10,9 +11,8 @@ document.getElementById("langTextArea").addEventListener('keypress', (e) => {
         let translatedText = textContent.substring(0, textContent.lastIndexOf(" "));
         let textToConvert = textContent.substring(textContent.lastIndexOf(" "));
         let patternHindi = /[\u0900-\u097F]/;
-        let patternSpace = / /;
-        // const textToConvert = e.key === 'Enter' ? "" : textContent.substring(textContent.lastIndexOf(" "));
-        if (patternHindi.test(textToConvert) || patternSpace.test(textToConvert)) {
+        if (patternHindi.test(textToConvert) || !textToConvert.replace(/\s/g, '').length
+        ) {
             textToConvert = "";
         }
         if (textToConvert != "") {
@@ -22,7 +22,7 @@ document.getElementById("langTextArea").addEventListener('keypress', (e) => {
                         console.log(data);
                         console.log(data[1][0][1][1]);
                         dropdownValues = data[1][0][1];
-                        var response = data[1][0][1][1] ? data[1][0][1][1] : data[1][0][1][0];
+                        response = data[1][0][1][1] ? data[1][0][1][1] : data[1][0][1][0];
                         if (translatedText !== "") {
                             translatedText = translatedText + response + " ";
                         }
@@ -52,10 +52,18 @@ document.getElementById("langTextArea").addEventListener('click', (e) => {
     document.getElementById("dropdown").style.display = 'none';
 });
 
+document.getElementById("dropdown").addEventListener("click", function() {
+    let translatedText = document.getElementById('langTextArea').value;
+    translatedText = translatedText.substring(0, translatedText.indexOf(response));
+    response = document.getElementById("dropdown").value;
+    translatedText = translatedText + document.getElementById("dropdown").value;
+    document.getElementById('langTextArea').value = translatedText;
+});
+
 
 function fillDropdown (e) {
     let select = document.getElementById("dropdown");
-
+    document.getElementById("dropdown").innerHTML = "";
     for (let i = 0; i < dropdownValues.length; i++) {
         let option = document.createElement("option"),
             txt = document.createTextNode(dropdownValues[i]);
