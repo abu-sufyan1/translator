@@ -36,8 +36,7 @@ document.getElementById("langTextArea").addEventListener('keypress', (e) => {
     }
 })
 
-document.getElementById("langTextArea").addEventListener('click', (e) => {
-    e.preventDefault();
+document.getElementById("langTextArea").addEventListener('dblclick', (e) => {
     document.getElementById("dropdown").style.top = e.clientY + 'px';
     document.getElementById("dropdown").style.left = e.clientX + 'px';
     if (document.getElementById("dropdown").style.display === 'none') {
