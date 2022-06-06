@@ -1,5 +1,4 @@
-body {
-    background-color: pink;
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -27,4 +26,48 @@ body {
     left: 50px;
     border: 1px solid red;
     display: none;
+}
+
+#langTextArea {
+    border: none;
+    height: 275px;
+    color: #222;
+    font-size: 120%!important;
+
+}
+
+textarea::-webkit-input-placeholder {
+  color: #eee;
+  text-align: center;
+  line-height: 1000%;
+  overflow: hidden;
+}
+
+textarea {
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none; /*remove the resize handle on the bottom right*/
+}
+
+.contains {
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 20px 12px 20px 12px
+}
+.site-header {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 25px;
+}
+
+.slogan-byline {
+    color: #999;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 10px;
+    margin-top: 21px;
 }
