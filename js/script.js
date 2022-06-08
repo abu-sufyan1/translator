@@ -2,11 +2,6 @@ var dropdownValues = [];
 var response = '';
 var cursorPosition = {};
 
-// var mousePosition = {x:0, y:0};
-// document.addEventListener('mousemove', function(mouseMoveEvent){
-//   mousePosition.x = mouseMoveEvent.pageX;
-//   mousePosition.y = mouseMoveEvent.pageY;
-// }, false);
 
 document.getElementById("langTextArea").addEventListener('keydown', (e) => {
 
@@ -64,7 +59,7 @@ document.getElementById("langTextArea").addEventListener('keydown', (e) => {
                 let value = document.getElementById('langTextArea').value;
                 value = value.substring(value.lastIndexOf(" ") + 1);
                 fillDropdown(value);
-                document.getElementById("dropdown").style.top = 160 + (cursorPosition.start/90) * 15 + 'px';
+                document.getElementById("dropdown").style.top = 160 + (cursorPosition.start / 90) * 15 + 'px';
                 document.getElementById("dropdown").style.left = 150 + (cursorPosition.start * 10) + 'px';
                 document.getElementById("dropdown").style.display = 'block';
                 document.getElementById("dropdown").focus();
@@ -75,15 +70,19 @@ document.getElementById("langTextArea").addEventListener('keydown', (e) => {
 })
 
 document.getElementById("langTextArea").addEventListener('click', (e) => {
-    document.getElementById("dropdown").style.top = e.clientY + 'px';
-    document.getElementById("dropdown").style.left = e.clientX + 'px';
-    if (document.getElementById("dropdown").style.display === 'none') {
-        fillDropdown(e.target.value);
-        document.getElementById("dropdown").style.display = 'block';
-    }
-    else {
-        document.getElementById("dropdown").style.display = 'none';
-    }
+    console.log(`X=${e.clientX}`);
+    console.log(`Y=${e.clientY}`);
+    // if ((e.clientX >= 225 + (cursorPosition.start * 10) || e.clientX <= 235 + (cursorPosition.start * 10)) && (e.clientY >= 225 + (cursorPosition.start / 90) * 15 || e.clientY <= 225 + (cursorPosition.start / 90) * 15)) {
+        document.getElementById("dropdown").style.top = 160 + (cursorPosition.start / 90) * 15 + 'px';
+        document.getElementById("dropdown").style.left = 150 + (cursorPosition.start * 10) + 'px';
+        if (document.getElementById("dropdown").style.display === 'none') {
+            fillDropdown(e.target.value);
+            document.getElementById("dropdown").style.display = 'block';
+        }
+        else {
+            document.getElementById("dropdown").style.display = 'none';
+        }
+    // }
 });
 
 
@@ -97,18 +96,6 @@ document.getElementById("dropdown").addEventListener("change", function () {
     document.getElementById('langTextArea').value = translatedTextBefore + document.getElementById("dropdown").value + translatedTextAfter;
 });
 
-// document.getElementById("dropdown").addEventListener("onchange", function () {
-//     let translatedText = document.getElementById('langTextArea').value;
-//     let translatedTextBefore = translatedText.substring(0, cursorPosition.start);
-//     translatedTextBefore = translatedTextBefore.substring(0, translatedTextBefore.lastIndexOf(" "));
-//     let translatedTextAfter = translatedText.substring(cursorPosition.start);
-//     translatedTextAfter = translatedTextAfter.substring(translatedTextAfter.indexOf(" "));
-
-//     document.getElementById('langTextArea').value = translatedTextBefore + document.getElementById("dropdown").value + translatedTextAfter;
-//     document.getElementById("dropdown").innerHTML = "";
-//     document.getElementById("dropdown").style.display = 'none';
-// });
-
 
 function fillDropdown(value) {
     let select = document.getElementById("dropdown");
@@ -116,8 +103,8 @@ function fillDropdown(value) {
     cursorPosition = getCursorPosition(document.getElementById("langTextArea"))
     let text = getTheWord(cursorPosition.start, value);
     let index = dropdownValues.findIndex(x => x.includes(text));
-    if(index === -1) {
-        index = dropdownValues.length -1;
+    if (index === -1) {
+        index = dropdownValues.length - 1;
     }
     let dropdownValue = dropdownValues[index];
     for (let i = 0; i < dropdownValue.length; i++) {
